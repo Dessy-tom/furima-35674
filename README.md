@@ -1,24 +1,62 @@
-# README
+## users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column           | Type   | Options     |
+|------------------|--------|-------------|
+| nickname         | string | null: false |
+| email            | string | null: false |
+| password         | string | null: false |
+| family_name      | string | null: false |
+| first_name       | string | null: false |
+| family_name_kana | string | null: false |
+| first_name_kana  | string | null: false |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :purchase_record
 
-* Ruby version
+## items
 
-* System dependencies
+| Column           | Type   | Options     |
+|------------------|--------|-------------|
+| name             | string | null: false |
+| text             | text   | null: false |
+| image            |        | null: false |
+| category         | string | null: false |
+| condition        | string | null: false |
+| shipping_charges | string | null: false |
+| shipping_area    | string | null: false |
+| shipping_days    | string | null: false |
+| price            | string | null: false |
 
-* Configuration
+## Association
+- belong_to :users
+- has_one :purchase_record
 
-* Database creation
+## destination
 
-* Database initialization
+| Column        | Type   | Options     |
+|---------------|--------|-------------|
+| post_code     | string | null: false |
+| prefecture    | string | null: false |
+| city          | string | null: false |
+| address       | string | null: false |
+| building_name | string |             |
+| phone number  | string | null: false |
 
-* How to run the test suite
+## Association
+- belong_to :purchase_record
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchase_record
 
-* Deployment instructions
+| Column | Type   | Options     |
+|--------|--------|-------------|
+| user   | string |             |
+| item   | string |             |
 
-* ...
+## Association
+- belong_to :users
+- belong_to :items
+- has_one :destination
+
+
+
