@@ -1,32 +1,33 @@
 ## users
 
-| Column           | Type   | Options     |
-|------------------|--------|-------------|
-| nickname         | string | null: false |
-| email            | string | null: false |
-| password         | string | null: false |
-| family_name      | string | null: false |
-| first_name       | string | null: false |
-| family_name_kana | string | null: false |
-| first_name_kana  | string | null: false |
+| Column             | Type   | Options     |
+|--------------------|--------|-------------|
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| family_name        | string | null: false |
+| first_name         | string | null: false |
+| family_name_kana   | string | null: false |
+| first_name_kana    | string | null: false |
+| birth_day          | date   | null: false |
 
 ### Association
 - has_many :items
-- has_many :purchase_record
+- has_many :purchase_records
 
 ## items
 
-| Column           | Type   | Options     |
-|------------------|--------|-------------|
-| name             | string | null: false |
-| text             | text   | null: false |
-| image            |        | null: false |
-| category         | string | null: false |
-| condition        | string | null: false |
-| shipping_charges | string | null: false |
-| shipping_area    | string | null: false |
-| shipping_days    | string | null: false |
-| price            | string | null: false |
+| Column           | Type       | Options     |
+|------------------|------------|-------------|
+| name             | string     | null: false |
+| text             | text       | null: false |
+| category         | integer    | null: false |
+| condition        | integer    | null: false |
+| shipping_charges | integer    | null: false |
+| shipping_area    | integer    | null: false |
+| shipping_days    | integer    | null: false |
+| price            | string     | null: false |
+| user             | references |             |
 
 ## Association
 - belong_to :users
@@ -34,17 +35,17 @@
 
 ## destination
 
-| Column        | Type   | Options     |
-|---------------|--------|-------------|
-| post_code     | string | null: false |
-| prefecture    | string | null: false |
-| city          | string | null: false |
-| address       | string | null: false |
-| building_name | string |             |
-| phone number  | string | null: false |
+| Column        | Type    | Options     |
+|---------------|---------|-------------|
+| post_code     | string  | null: false |
+| prefecture    | integer | null: false |
+| city          | string  | null: false |
+| address       | string  | null: false |
+| building_name | string  |             |
+| phone number  | string  | null: false |
 
 ## Association
-- belong_to :purchase_record
+- belongs_to :purchase_record
 
 ## purchase_record
 
@@ -54,8 +55,8 @@
 | item   | string |             |
 
 ## Association
-- belong_to :users
-- belong_to :items
+- belong_to :user
+- belong_to :item
 - has_one :destination
 
 
