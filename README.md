@@ -23,7 +23,7 @@
 | text                | text       | null: false       |
 | category_id         | integer    | null: false       |
 | condition_id        | integer    | null: false       |
-| shipping_charges_id | integer    | null: false       |
+| shipping_charge_id  | integer    | null: false       |
 | shipping_area_id    | integer    | null: false       |
 | shipping_day_id     | integer    | null: false       |
 | price               | integer    | null: false       |
@@ -35,15 +35,15 @@
 
 ## destination
 
-| Column          | Type       | Options           |
-|-----------------|------------|-------------------|
-| post_code       | string     | null: false       |
-| prefecture      | integer    | null: false       |
-| city            | string     | null: false       |
-| address         | string     | null: false       |
-| building_name   | string     |                   |
-| phone number    | string     | null: false       |
-| purchase_record | references | foreign_key: true |
+| Column           | Type       | Options           |
+|------------------|------------|-------------------|
+| post_code        | string     | null: false       |
+| shipping_area_id | integer    | null: false       |
+| city             | string     | null: false       |
+| address          | string     | null: false       |
+| building_name    | string     |                   |
+| phone_number     | string     | null: false       |
+| purchase_record  | references | foreign_key: true |
 
 
 ## Association
