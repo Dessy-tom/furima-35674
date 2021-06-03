@@ -73,43 +73,42 @@ RSpec.describe User, type: :model do
       @user.password = '123456'
       @user.password_confirmation = '123456'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include('Password is invalid')
     end
     it 'passwordが全角のみだと登録できない' do
       @user.password = 'ああああああ'
       @user.password_confirmation = 'ああああああ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include('Password is invalid')
     end
     it 'passwordが全角のみだと登録できない' do
       @user.password = 'aaaaaa'
       @user.password_confirmation = 'aaaaaa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include('Password is invalid')
     end
 
     # ここからユーザー名の詳細
     it 'family_nameが英数では登録できない' do
       @user.family_name = 'tomo2'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name is invalid")
+      expect(@user.errors.full_messages).to include('Family name is invalid')
     end
     it 'first_nameが英数では登録できない' do
       @user.first_name = 'tomo2'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name is invalid")
+      expect(@user.errors.full_messages).to include('First name is invalid')
     end
     it 'family_name_kanaがカタカナでないと登録できない' do
       @user.family_name_kana = '柴崎'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name kana is invalid")
+      expect(@user.errors.full_messages).to include('Family name kana is invalid')
     end
     it 'first_name_kanaがカタカナでないと登録できない' do
       @user.first_name_kana = 'ともや'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name kana is invalid")
+      expect(@user.errors.full_messages).to include('First name kana is invalid')
     end
-
 
     # ここからemail詳細
     it '重複したemailが存在する場合登録できないこと' do
@@ -125,4 +124,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-
