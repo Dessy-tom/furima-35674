@@ -53,8 +53,8 @@ RSpec.describe User, type: :model do
 
     # ここからパスワードの詳細
     it 'passwordが6文字以上であれば登録できること' do
-      @user.password = '123456'
-      @user.password_confirmation = '123456'
+      @user.password = 'test12'
+      @user.password_confirmation = 'test12'
       expect(@user).to be_valid
     end
     it 'passwordが5文字以下であれば登録できないこと' do
@@ -69,6 +69,35 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+    it 'passwordが半角英数字混合出ないと登録できない' do
+      @user.password = '123456'
+      @user.password_confirmation = '123456'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
+    # ここからユーザー名の詳細
+    it 'family_nameが英数では登録できない' do
+      @user.family_name = 'tomo2'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name is invalid")
+    end
+    it 'first_nameが英数では登録できない' do
+      @user.first_name = 'tomo2'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+    it 'family_name_kanaがカタカナでないと登録できない' do
+      @user.family_name_kana = '柴崎'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name kana is invalid")
+    end
+    it 'first_name_kanaがカタカナでないと登録できない' do
+      @user.first_name_kana = 'ともや'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+    end
+
 
     # ここからemail詳細
     it '重複したemailが存在する場合登録できないこと' do
