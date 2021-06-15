@@ -1,10 +1,9 @@
 class PurchaseRecordsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :set_item
   before_action :sold_out
 
   def index
-    redirect_to new_user_session_path unless current_user
     @purchase_record_destination = PurchaseRecordDestination.new
     if current_user == @item.user
       redirect_to root_path
