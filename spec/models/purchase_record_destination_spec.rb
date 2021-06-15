@@ -71,6 +71,11 @@ RSpec.describe PurchaseRecordDestination, type: :model do
         @purchase_record_destination.valid?
         expect(@purchase_record_destination.errors.full_messages).to include("Item can't be blank")
       end
+      it "トークンが空だと保存できない" do
+        @purchase_record_destination.token = nil
+        @purchase_record_destination.valid?
+        expect(@purchase_record_destination.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
