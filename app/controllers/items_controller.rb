@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :sold_out, only: [:update, :edit]
+
 
   def index
     @items = Item.all.order(id: :DESC)
@@ -23,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to action: :index unless @item.user_id == current_user.id
+    redirect_to root_path unless @item.user_id == current_user.id 
   end
 
   def update
@@ -50,5 +52,9 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def sold_out
+    redirect_to root_path if @item.purchase_record.present?
   end
 end
