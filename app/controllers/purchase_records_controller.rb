@@ -5,11 +5,8 @@ class PurchaseRecordsController < ApplicationController
 
   def index
     @purchase_record_destination = PurchaseRecordDestination.new
-    if current_user == @item.user
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user == @item.user
   end
-
 
   def create
     @purchase_record_destination = PurchaseRecordDestination.new(donation_params)
@@ -26,7 +23,9 @@ class PurchaseRecordsController < ApplicationController
 
   def donation_params
     item = Item.find(params[:item_id])
-    params.require(:purchase_record_destination).permit(:post_code, :shipping_area_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:purchase_record_destination).permit(:post_code, :shipping_area_id, :city, :address, :building_name, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def set_item
@@ -34,7 +33,7 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def pry_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: donation_params[:token],
@@ -45,7 +44,4 @@ class PurchaseRecordsController < ApplicationController
   def sold_out
     redirect_to root_path if @item.purchase_record.present?
   end
-
-
-
 end

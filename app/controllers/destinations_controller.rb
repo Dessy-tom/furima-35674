@@ -1,3 +1,2 @@
 class DestinationsController < ApplicationController
-
 end

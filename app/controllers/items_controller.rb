@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :sold_out, only: [:update, :edit]
 
-
   def index
     @items = Item.all.order(id: :DESC)
   end
@@ -25,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless @item.user_id == current_user.id 
+    redirect_to root_path unless @item.user_id == current_user.id
   end
 
   def update
